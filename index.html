@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GURU CERDAS AI — Generator Perangkat Pembelajaran</title>
+<style>
+:root{--green:#126b45;--green2:#198754;--navy:#142d4e;--gold:#d8ad4a;--bg:#f3f6f4;--ink:#1c2b25;--muted:#68766f;--line:#dce6df;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(120deg,#103f30,#176b49 60%,#1d5270);color:white;padding:25px max(20px,calc((100vw - 1200px)/2));}
+.brand{display:flex;align-items:center;gap:13px}.logo{width:48px;height:48px;border-radius:14px;background:#ffffff20;border:1px solid #ffffff55;display:grid;place-items:center;font-size:25px}
+h1{font-size:clamp(22px,3vw,32px);margin:0;letter-spacing:.2px}.tag{opacity:.88;margin:5px 0 0}
+.wrap{max-width:1200px;margin:22px auto;padding:0 18px 40px;display:grid;grid-template-columns:340px 1fr;gap:20px}
+.panel,.workspace{background:white;border:1px solid var(--line);border-radius:16px;box-shadow:0 5px 20px #183d2810}
+.panel{padding:19px;height:max-content}.workspace{min-height:680px;overflow:hidden}
+h2{font-size:18px;margin:0 0 14px;color:var(--navy)}h3{font-size:16px;margin:18px 0 8px}
+label{display:block;font-weight:650;font-size:13px;margin:12px 0 5px}
+input,select,textarea{width:100%;padding:10px 11px;border:1px solid #ccd9d1;border-radius:9px;background:#fff;color:var(--ink);font:inherit}
+textarea{min-height:75px;resize:vertical}input:focus,select:focus,textarea:focus{outline:2px solid #b5dec8;border-color:var(--green2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.hint{font-size:12px;color:var(--muted);margin-top:5px}
+.btn{border:0;border-radius:10px;padding:11px 14px;font-weight:700;cursor:pointer;font:inherit}
+.primary{background:var(--green);color:#fff}.secondary{background:#e9f3ed;color:var(--green)}.dark{background:var(--navy);color:white}.danger{background:#fff0ee;color:#a13a2d}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.topbar{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.tabs{display:flex;gap:7px;flex-wrap:wrap}.tab{background:#eef4f0;color:#315342;border:0;border-radius:9px;padding:8px 11px;font-weight:650;cursor:pointer}.tab.active{background:var(--green);color:white}
+.content{padding:22px}.empty{min-height:500px;display:grid;place-items:center;text-align:center;color:var(--muted);padding:30px}.empty .big{font-size:48px}.result{white-space:pre-wrap;line-height:1.72;font-family:Arial,sans-serif;color:#202820}.result h2{margin-top:20px}
+.status{padding:10px 12px;border-radius:9px;background:#f0f6f2;color:#356047;font-size:13px;margin-top:10px}
+.keybox{padding:12px;background:#f6f8f6;border:1px dashed #c9d8ce;border-radius:11px;margin-top:14px}
+.keybox summary{font-weight:700;cursor:pointer}.keybox p{font-size:12px;color:var(--muted)}
+.small{font-size:12px;color:var(--muted)}.badge{font-size:11px;background:#e8f5ed;color:#17643f;border-radius:30px;padding:4px 8px;font-weight:700}
+footer{text-align:center;color:#78867e;font-size:12px;padding:16px}
+@media(max-width:850px){.wrap{grid-template-columns:1fr}.workspace{min-height:500px}.empty{min-height:300px}}
+@media print{header,.panel,.topbar,.actions,.no-print,footer{display:none!important}body{background:white}.wrap{display:block;margin:0;padding:0}.workspace{border:0;box-shadow:none}.content{padding:0}.result{font-size:11pt}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">🎓</div><div><h1>GURU CERDAS AI</h1><div class="tag">Generator Perangkat Pembelajaran • Praktis, sistematis, siap diedit</div></div></div></header>
+<div class="wrap">
+<aside class="panel">
+<h2>⚙️ Identitas & Pengaturan</h2>
+<label>Nama sekolah / madrasah</label><input id="school" value="MI AL ISLAM">
+<div class="grid2"><div><label>Jenjang</label><select id="level"><option>MI</option><option>SD</option><option>MTs</option><option>SMP</option><option>MA</option><option>SMA</option><option>SMK</option><option>RA</option></select></div><div><label>Kelas / fase</label><input id="grade" value="4 / Fase B"></div></div>
+<div class="grid2"><div><label>Kurikulum</label><select id="curriculum"><option>Kurikulum Madrasah (KMA 1503 Tahun 2025 / PM-KBC)</option><option>Kurikulum Merdeka</option><option>Kurikulum 2013</option><option>Kurikulum Satuan Pendidikan</option></select></div><div><label>Tahun pelajaran</label><input id="year" value="2026/2027"></div></div>
+<label>Mata pelajaran</label><input id="subject" placeholder="Contoh: Bahasa Indonesia">
+<div class="grid2"><div><label>Semester</label><select id="semester"><option>Ganjil</option><option>Genap</option></select></div><div><label>Alokasi waktu</label><input id="duration" placeholder="2 JP / 70 menit"></div></div>
+<label>Topik / materi pokok</label><input id="topic" placeholder="Tuliskan topik pembelajaran">
+<label>Tujuan / kompetensi khusus (opsional)</label><textarea id="goal" placeholder="Kebutuhan khusus, capaian, atau fokus pembelajaran..."></textarea>
+<label>Karakteristik peserta didik (opsional)</label><textarea id="students" placeholder="Contoh: kemampuan beragam, perlu aktivitas konkret..."></textarea>
+<label>Jenis perangkat yang dibuat</label>
+<select id="doctype">
+<option value="Paket perangkat pembelajaran lengkap">Paket lengkap (Modul + TP + ATP + Materi + Asesmen + LKPD)</option>
+<option>Modul Ajar / RPP</option><option>Tujuan Pembelajaran (TP)</option><option>Alur Tujuan Pembelajaran (ATP)</option><option>Materi dan Bahan Ajar</option><option>Soal Evaluasi dan Asesmen</option><option>LKPD</option><option>Media dan Strategi Pembelajaran</option><option>Program Tahunan (Prota)</option><option>Program Semester (Promes)</option><option>Jurnal Mengajar Guru</option><option>Analisis Hasil Asesmen</option><option>Program Remedial dan Pengayaan</option><option>Kisi-kisi dan Rubrik Penilaian</option><option>Administrasi Pembelajaran Lainnya</option>
+</select>
+<div class="grid2"><div><label>Jumlah soal (jika relevan)</label><input id="qcount" type="number" min="1" max="100" value="10"></div><div><label>Level kognitif</label><select id="cognitive"><option>Campuran C1–C6</option><option>C1–C2 (Mengingat–Memahami)</option><option>C3–C4 (Menerapkan–Menganalisis)</option><option>C5–C6 (Mengevaluasi–Mencipta)</option></select></div></div>
+<div class="keybox">
+<details><summary>🔑 Pengaturan AI (opsional)</summary>
+<p>Masukkan Gemini API Key milik Anda untuk menghasilkan dokumen dengan AI. Dapatkan kunci melalui Google AI Studio. Penggunaan API gratis memiliki kuota dan ketentuan yang dapat berubah. Kunci disimpan hanya di browser ini (localStorage), bukan di server aplikasi.</p>
+<label>Gemini API Key</label><input id="apikey" type="password" placeholder="Tempel API key di sini">
+<div class="hint">Jangan gunakan kunci pribadi pada komputer umum. Jika aplikasi dipublikasikan untuk banyak pengguna, gunakan backend/proxy yang aman.</div>
+</details></div>
+<div class="actions"><button class="btn primary" id="generate">✨ Buat dengan AI</button><button class="btn secondary" id="local">Buat kerangka tanpa API</button></div>
+<div class="status" id="status">Siap digunakan. Isi mata pelajaran dan topik, lalu pilih jenis perangkat.</div>
+</aside>
+<main class="workspace">
+<div class="topbar">
+<div><strong>Ruang Hasil Perangkat</strong> <span class="badge">Dapat diedit</span></div>
+<div class="tabs"><button class="tab active" id="tabresult">Hasil</button><button class="tab" id="tabguide">Panduan</button></div>
+</div>
+<div class="content" id="resultarea"><div class="empty"><div><div class="big">📚</div><h2>Perangkat pembelajaran Anda akan tampil di sini</h2><p>Lengkapi identitas, mata pelajaran, dan topik.<br>Gunakan tombol “Buat dengan AI” untuk menyusun dokumen.</p></div></div></div>
+<div class="content" id="guidearea" hidden>
+<h2>Panduan penggunaan</h2><ol><li>Lengkapi identitas sekolah, jenjang, kelas/fase, kurikulum, mapel, dan topik.</li><li>Pilih perangkat yang ingin dibuat.</li><li>Untuk generasi AI, masukkan Gemini API Key. Tombol kerangka tanpa API dapat digunakan tanpa kunci.</li><li>Periksa kesesuaian dokumen dengan kurikulum, CP/kompetensi, kalender pendidikan, dan kondisi kelas.</li><li>Salin, unduh dokumen Word, atau cetak/simpan sebagai PDF.</li></ol>
+<p><b>Catatan penting:</b> AI dapat keliru. Periksa kembali regulasi, istilah kurikulum, tujuan, kunci jawaban, dan alokasi waktu. Aplikasi tidak mengarang data resmi sekolah, nomor surat, tanda tangan, atau bukti kegiatan.</p>
+</div>
+</main>
+</div>
+<footer>GURU CERDAS AI • Versi awal • Aplikasi berjalan di browser</footer>
+<script>
+const $=id=>document.getElementById(id);
+const fields=['school','level','grade','curriculum','year','subject','semester','duration','topic','goal','students','doctype','qcount','cognitive'];
+$('apikey').value=localStorage.getItem('gca_key')||'';
+$('apikey').addEventListener('change',()=>localStorage.setItem('gca_key',$('apikey').value.trim()));
+function data(){let o={};fields.forEach(k=>o[k]=$(k).value.trim());return o}
+function validate(d){if(!d.subject||!d.topic){$('status').textContent='Mohon isi mata pelajaran dan topik terlebih dahulu.';return false}return true}
+function promptFor(d){return `Anda adalah ahli pengembangan kurikulum dan perancang pembelajaran Indonesia yang teliti. Buat dokumen perangkat pembelajaran dalam Bahasa Indonesia yang formal, rinci, praktis, dan siap diedit guru.
+
+IDENTITAS
+Sekolah/Madrasah: ${d.school}
+Jenjang: ${d.level}; Kelas/Fase: ${d.grade}
+Kurikulum: ${d.curriculum}
+Tahun Pelajaran: ${d.year}; Semester: ${d.semester}
+Mata Pelajaran: ${d.subject}; Topik: ${d.topic}
+Alokasi Waktu: ${d.duration||'sesuaikan secara wajar'}
+Kebutuhan/tujuan khusus: ${d.goal||'Rumuskan sesuai topik dan jenjang'}
+Karakteristik peserta didik: ${d.students||'Asumsikan kelas dengan kemampuan beragam dan berikan diferensiasi'}
+
+JENIS DOKUMEN: ${d.doctype}
+Jika soal relevan, buat ${d.qcount} soal dengan tingkat kognitif ${d.cognitive}, sertakan kunci jawaban, pedoman penskoran, dan kisi-kisi.
+
+KETENTUAN:
+1. Sesuaikan perkembangan peserta didik dan jenjang. Jangan mencampur istilah kurikulum yang tidak relevan.
+2. Untuk Kurikulum Madrasah, perhatikan konteks KMA 1503 Tahun 2025 dan PM-KBC sebagai arahan yang harus diverifikasi guru; jangan mengarang kutipan pasal, nomor keputusan, atau ketentuan resmi.
+3. Jika CP/kompetensi resmi tidak diberikan, tandai rumusan sebagai draf yang harus dicocokkan dengan dokumen kurikulum satuan pendidikan, bukan mengklaim sebagai kutipan resmi.
+4. Buat struktur jelas dengan judul, identitas, tabel bila bermanfaat, langkah kegiatan pembelajaran (pendahuluan-inti-penutup), diferensiasi, asesmen diagnostik-formatif-sumatif bila sesuai, rubrik, remedial, pengayaan, refleksi guru dan peserta didik.
+5. Sertakan nilai karakter, literasi, numerasi, dan konteks kehidupan nyata jika relevan. Untuk madrasah, integrasikan nilai keislaman secara wajar tanpa memaksakan.
+6. Jangan mengarang nama kepala sekolah, tanda tangan, tanggal pengesahan, nilai siswa, nomor dokumen, atau bukti pelaksanaan. Sediakan kolom kosong bila diperlukan.
+7. Gunakan bahasa Indonesia baku, hindari pengulangan, dan pastikan isi dapat langsung disunting.
+8. Keluarkan dokumen saja, tanpa pembukaan percakapan atau klaim bahwa dokumen sudah disahkan.`}
+function skeleton(d){return `DRAF ${d.doctype.toUpperCase()}\n${d.school}\n\nA. IDENTITAS\nJenjang: ${d.level}\nKelas/Fase: ${d.grade}\nMata Pelajaran: ${d.subject}\nTopik: ${d.topic}\nKurikulum: ${d.curriculum}\nTahun Pelajaran: ${d.year}\nSemester: ${d.semester}\nAlokasi Waktu: ${d.duration||'................'}\n\nB. TUJUAN PEMBELAJARAN\n1. Peserta didik mampu ................................................\n2. Peserta didik mampu ................................................\n\nC. MATERI POKOK\n........................................................................\n\nD. LANGKAH PEMBELAJARAN\n1. Pendahuluan: orientasi, apersepsi, motivasi, dan penyampaian tujuan.\n2. Kegiatan inti: eksplorasi materi, aktivitas kolaboratif, praktik, dan umpan balik.\n3. Penutup: refleksi, rangkuman, tindak lanjut, dan doa/penutup sesuai konteks.\n\nE. ASESMEN\nDiagnostik: ...........................................................\nFormatif: .............................................................\nSumatif: ..............................................................\n\nF. DIFERENSIASI, REMEDIAL, DAN PENGAYAAN\n........................................................................\n\nG. REFLEKSI GURU DAN PESERTA DIDIK\n........................................................................\n\nCATATAN: Ini kerangka awal, bukan dokumen final. Lengkapi dan validasi sesuai dokumen kurikulum satuan pendidikan.`}
+async function generate(useAI){
+ const d=data();if(!validate(d))return;
+ $('generate').disabled=true;$('local').disabled=true;
+ $('status').textContent=useAI?'Menghubungi Gemini AI…':'Menyusun kerangka perangkat…';
+ try{
+  let out;
+  if(useAI){
+   const key=$('apikey').value.trim();if(!key)throw new Error('Masukkan Gemini API Key pada bagian Pengaturan AI terlebih dahulu.');
+   const response=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+encodeURIComponent(key),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:promptFor(d)}]}],generationConfig:{temperature:0.45,maxOutputTokens:8000}})});
+   const j=await response.json();if(!response.ok)throw new Error(j.error?.message||'Permintaan AI gagal. Periksa API key dan kuota.');
+   out=(j.candidates||[]).map(c=>(c.content?.parts||[]).map(p=>p.text||'').join('\n')).join('\n\n');if(!out)throw new Error('AI tidak mengembalikan isi. Coba lagi.');
+  }else out=skeleton(d);
+  render(out,d);$('status').textContent=useAI?'Dokumen berhasil dibuat. Periksa kembali sebelum digunakan.':'Kerangka berhasil dibuat. Hubungkan Gemini untuk isi AI yang lengkap.';
+ }catch(e){$('status').textContent='Gagal: '+e.message}
+ finally{$('generate').disabled=false;$('local').disabled=false}
+}
+function render(text,d){
+ const area=$('resultarea');area.innerHTML='';
+ const head=document.createElement('div');head.className='actions no-print';
+ [['Salin isi',()=>navigator.clipboard.writeText(text)],['Unduh Word (.doc)',()=>downloadDoc(text,d)],['Cetak / Simpan PDF',()=>window.print()]].forEach(([label,fn])=>{let b=document.createElement('button');b.className='btn secondary';b.textContent=label;b.onclick=fn;head.appendChild(b)});
+ const edit=document.createElement('textarea');edit.id='editable';edit.value=text;edit.style.minHeight='580px';edit.style.fontFamily='Arial';edit.style.lineHeight='1.6';edit.style.marginTop='16px';
+ const note=document.createElement('div');note.className='hint no-print';note.textContent='Anda dapat mengedit isi dokumen langsung pada kotak teks sebelum menyalin atau mengunduh.';
+ area.append(head,note,edit);
+}
+function downloadDoc(text,d){
+ const safe=text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+ const doc=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${d.doctype}</title><style>body{font-family:"Times New Roman",serif;font-size:12pt;line-height:1.5}pre{white-space:pre-wrap;font-family:inherit}</style></head><body><pre>${safe}</pre></body></html>`;
+ const blob=new Blob([doc],{type:'application/msword'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(d.doctype.replace(/[^a-z0-9]+/gi,'_')+'_'+d.school.replace(/[^a-z0-9]+/gi,'_')+'.doc');a.click();URL.revokeObjectURL(a.href);
+}
+$('generate').onclick=()=>generate(true);$('local').onclick=()=>generate(false);
+$('tabresult').onclick=()=>{$('resultarea').hidden=false;$('guidearea').hidden=true;$('tabresult').classList.add('active');$('tabguide').classList.remove('active')};
+$('tabguide').onclick=()=>{$('resultarea').hidden=true;$('guidearea').hidden=false;$('tabguide').classList.add('active');$('tabresult').classList.remove('active')};
+</script>
+</body></html>
